@@ -4,7 +4,7 @@ This project is created to mimic the features in paint online.
 
 ## Features / Tools
 
-![Features Demo](public\demo\features.png)
+![Features Demo](https://github.com/eunicocornelius/drawable/blob/main/public/demo/features.png?raw=true)
 
 The tools available in this project are:
 
