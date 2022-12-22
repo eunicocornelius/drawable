@@ -1,90 +1,78 @@
-import React from "react";
-
-interface ToolbeltProps {
-  drawing: boolean;
-  changeMode: (newMode: string) => void;
-  changeDrawing: () => void;
-  onAddCircle: () => void;
-  onAddRectangle: () => void;
-  onAddTriangle: () => void;
-  onAddImage: () => void;
-  onAddLine: () => void;
-  onAddText: () => void;
-  onRemove: () => void;
-  onColorRed: () => void;
-  onColorGreen: () => void;
-  onColorBlue: () => void;
-}
-
-function Toolbelt({
-  drawing,
-  changeMode,
-  changeDrawing,
+import { FabricJSEditor } from "fabricjs-react";
+import {
   onAddCircle,
-  onAddRectangle,
-  onAddTriangle,
   onAddImage,
   onAddLine,
+  onAddRectangle,
   onAddText,
-  onRemove,
-  onColorRed,
-  onColorGreen,
+  onAddTriangle,
   onColorBlue,
-}: ToolbeltProps) {
+  onColorGreen,
+  onColorRed,
+  onRemove,
+} from "../utils/FabricUtils";
+
+interface ToolbeltProps {
+  editor: FabricJSEditor | undefined;
+  drawing: boolean;
+  changeDrawing: () => void;
+}
+
+function Toolbelt({ editor, drawing, changeDrawing }: ToolbeltProps) {
   return (
     <div className="  bg-slate-600 w-14 text-gray-400 p-4 flex space-y-2 rounded-xl flex-wrap">
       <button
         className="hover:text-gray-300 hover:scale-125 transition ease-in-out duration-300"
         value="upload-image"
-        onClick={onAddImage}
+        onClick={() => onAddImage(editor)}
       >
         <div className="material-icons-round ">drive_folder_upload</div>
       </button>
       <button
         className="hover:text-gray-300 hover:scale-125 transition ease-in-out duration-300"
-        onClick={onAddRectangle}
+        onClick={() => onAddRectangle(editor)}
       >
         <div className="material-icons-round ">crop_square</div>
       </button>
       {/* <button
         className="hover:text-gray-300 hover:scale-125 transition ease-in-out duration-300"
-        onClick={onAddRectangle}
+        onClick={() => onAddRectangle(editor)}
       >
         <div className="material-icons-outlined">rectangle</div>
       </button> */}
       <button
         className="hover:text-gray-300 hover:scale-125 transition ease-in-out duration-300"
-        onClick={onAddTriangle}
+        onClick={() => onAddTriangle(editor)}
       >
         <div className="material-icons-round ">signal_cellular_null</div>
       </button>
       <button
         className="hover:text-gray-300 hover:scale-125 transition ease-in-out duration-300"
-        onClick={onAddCircle}
+        onClick={() => onAddCircle(editor)}
       >
         <div className="material-icons-round ">panorama_fish_eye</div>
       </button>
       <button
         className="hover:text-gray-300 hover:scale-125 transition ease-in-out duration-300"
-        onClick={onAddLine}
+        onClick={() => onAddLine(editor)}
       >
         <div className="material-icons ">timeline</div>
       </button>
       <button
         className="text-red-400 hover:text-red-500 hover:scale-125 transition ease-in-out duration-300"
-        onClick={onColorRed}
+        onClick={() => onColorRed(editor)}
       >
         <div className="material-icons-round ">square</div>
       </button>
       <button
         className="text-green-400 hover:text-green-500 hover:scale-125 transition ease-in-out duration-300"
-        onClick={onColorGreen}
+        onClick={() => onColorGreen(editor)}
       >
         <div className="material-icons-round ">square</div>
       </button>
       <button
         className="text-blue-400 hover:text-blue-500 hover:scale-125 transition ease-in-out duration-300"
-        onClick={onColorBlue}
+        onClick={() => onColorBlue(editor)}
       >
         <div className="material-icons-round ">square</div>
       </button>
@@ -100,13 +88,13 @@ function Toolbelt({
       </button>
       <button
         className="hover:text-gray-300 hover:scale-125 transition ease-in-out duration-300"
-        onClick={onAddText}
+        onClick={() => onAddText(editor)}
       >
         <div className="material-icons">text_fields</div>
       </button>
       <button
         className="hover:text-gray-300 hover:scale-125 transition ease-in-out duration-300"
-        onClick={onRemove}
+        onClick={() => onRemove(editor)}
       >
         <div className="material-icons-outlined">remove_circle</div>
       </button>
