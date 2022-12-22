@@ -25,14 +25,7 @@ function App() {
       editor.canvas.backgroundColor = "white";
     }
     editor?.canvas?.renderAll();
-    // editor.setFillColor("transparent");
   }, [editor]);
-
-  useEffect(() => {
-    let imageUpload = document.getElementById("image-file");
-
-    imageUpload?.addEventListener("change", addImage);
-  }, []);
 
   useEffect(() => {
     if (editor != undefined) {
@@ -45,11 +38,30 @@ function App() {
     }
   }, [drawing]);
 
-  // useEffect(() => {
-  //   fabric.Image.fromURL("./test.jpg", function (img) {
-  //     editor?.canvas.add(img);
-  //   });
-  // }, [fabric, editor]);
+  const imageHandler = (e: any) => {
+    let imageUpload = document.getElementById("image-file");
+
+    if (imageUpload != null && e != null) {
+      var reader = new FileReader();
+      reader.onload = function (event: any) {
+        var imgObj = new Image();
+        imgObj.src = event.target.result;
+        imgObj.onload = function () {
+          var image = new fabric.Image(imgObj);
+          image
+            .set({
+              left: 0,
+              top: 0,
+              angle: 0,
+              padding: 10,
+            })
+            .scale(0.2);
+          editor?.canvas.add(image);
+        };
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
 
   const onAddCircle = () => {
     editor?.addCircle();
@@ -176,6 +188,7 @@ function App() {
               id="image-file"
               accept="image/jpeg, image/png, image/jpg"
               className="hidden"
+              onChange={imageHandler}
             />
             {/* <canvas className="w-full h-full bg-slate-100 shadow-2xl rounded-xl"></canvas> */}
             <FabricJSCanvas
